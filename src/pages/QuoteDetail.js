@@ -1,10 +1,14 @@
 import React from 'react'
+import { useParams } from 'react-router'
 
 const QuoteDetail = () => {
+const params = useParams()
     return (
-        <div>
+        <React.Fragment>
             <h1>To view single quote</h1>
-        </div>
+            <p>{params.quoteId}</p>
+
+        </React.Fragment>
     )
 }
 
