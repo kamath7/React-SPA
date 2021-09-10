@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
   return (
@@ -8,7 +8,10 @@ const MainNavigation = () => {
       <nav className={classes.nav}>
         <ul>
           <li>
-            <Link></Link>
+            <NavLink to="/quotes" className={classes.active}>All Quotes</NavLink>
+          </li>
+          <li>
+            <NavLink to="/addQuote" className={classes.active}>Add a Quote</NavLink>
           </li>
         </ul>
       </nav>
