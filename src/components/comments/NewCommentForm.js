@@ -7,7 +7,7 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
   //  alternate ->const params = useParams()
-  
+
   const { sendRequest, status, error } = useHttp(addComment);
   const { onAddComment } = props;
   useEffect(() => {
@@ -21,7 +21,7 @@ const NewCommentForm = (props) => {
     // optional: Could validate here
 
     // send comment to server
-    sendRequest({ text: enteredText }, props.quoteId);
+    sendRequest({ commentData: { text: enteredText }, quoteId: props.quoteId });
   };
 
   return (
