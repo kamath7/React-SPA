@@ -6,11 +6,7 @@ import HighlightedQuote from "../components/quotes/HighlightedQuote";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
 import useHttp from "../hooks/use-http";
 import { getSingleQuote } from "../lib/api";
-const DUMMY_QUOTES = [
-  { id: "q1", author: "Kams", text: "Rhea stupid" },
-  { id: "q2", author: "Somebody", text: "Pujit PS" },
-  { id: "q3", author: "God", text: "Dhoni is the GOAT" },
-];
+
 const QuoteDetail = () => {
   const params = useParams();
   const { quoteId } = params;

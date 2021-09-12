@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import { getAllComments } from "../../lib/api";
@@ -18,7 +18,9 @@ const Comments = () => {
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
-  const addCommentHandler = () => {};
+  const addCommentHandler = useCallback(() => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
   let comments;
   if (status === "pending") {
     comments = (
@@ -33,26 +35,23 @@ const Comments = () => {
   if (
     status === "completed" &&
     (!loadedComments || loadedComments.length === 0)
-  ){
-    comments = <p className="centered">No comments in yet!😐</p>
+  ) {
+    comments = <p className="centered">No comments in yet!😐</p>;
   }
-    return (
-      <section className={classes.comments}>
-        <h2>User Comments</h2>
-        {!isAddingComment && (
-          <button className="btn" onClick={startAddCommentHandler}>
-            Add a Comment
-          </button>
-        )}
-        {isAddingComment && (
-          <NewCommentForm
-            quoteId={quoteId}
-            onAddComment={addCommentHandler}
-          />
-        )}
-        <p>Comments...</p>
-      </section>
-    );
+  return (
+    <section className={classes.comments}>
+      <h2>User Comments</h2>
+      {!isAddingComment && (
+        <button className="btn" onClick={startAddCommentHandler}>
+          Add a Comment
+        </button>
+      )}
+      {isAddingComment && (
+        <NewCommentForm quoteId={quoteId} onAddComment={addCommentHandler} />
+      )}
+      {comments}
+    </section>
+  );
 };
 
 export default Comments;

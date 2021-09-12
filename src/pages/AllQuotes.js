@@ -4,11 +4,7 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 import useHttp from "../hooks/use-http";
 import { getAllQuotes } from "../lib/api";
 import NoQuotesFound from "../components/quotes/NoQuotesFound";
-const DUMMY_QUOTES = [
-  { id: "q1", author: "Kams", text: "Rhea stupid" },
-  { id: "q2", author: "Somebody", text: "Pujit PS" },
-  { id: "q3", author: "God", text: "Dhoni is the GOAT" },
-];
+
 const AllQuotes = () => {
   const {
     sendRequest,
