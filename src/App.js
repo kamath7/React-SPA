@@ -1,9 +1,13 @@
+import React from 'react';
 import { Redirect, Route, Switch } from "react-router-dom";
-import AddQuote from "./pages/AddQuote";
+// import AddQuote from "./pages/AddQuote"; -> Lazy Loading added below
 import AllQuotes from "./pages/AllQuotes";
 import QuoteDetail from "./pages/QuoteDetail";
 import Layout from "./components/layout/Layout";
 import NotFound from "./pages/NotFound";
+
+const AddQuote = React.lazy(()=> import("./pages/AddQuote")) //Lazy loading for adding new quote
+
 function App() {
   return (
     <Layout>
