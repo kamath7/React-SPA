@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 // import AddQuote from "./pages/AddQuote"; -> Lazy Loading added below
-import AllQuotes from "./pages/AllQuotes";
-import QuoteDetail from "./pages/QuoteDetail";
+// import AllQuotes from "./pages/AllQuotes";
+// import QuoteDetail from "./pages/QuoteDetail";
 import Layout from "./components/layout/Layout";
-import NotFound from "./pages/NotFound";
+// import NotFound from "./pages/NotFound";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 
-const AddQuote = React.lazy(()=> import("./pages/AddQuote")) //Lazy loading for adding new quote
+const AddQuote = React.lazy(() => import("./pages/AddQuote")); //Lazy loading for adding new quote
+const QuoteDetail = React.lazy(()=> import ("./pages/QuoteDetail"))
+const NotFound = React.lazy(()=> import ("./pages/NotFound"))
+const AllQuotes = React.lazy(()=> import ("./pages/AllQuotes"))
 
 function App() {
   return (
     <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/quotes" />
-        </Route>
-        <Route path="/quotes" exact>
-          <AllQuotes />
-        </Route>
-        <Route path="/quotes/:quoteId">
-          <QuoteDetail />
-        </Route>
-        <Route path="/addQuote">
-          <AddQuote />
-        </Route>
-        {/* implementation for if route is not found */}
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
+      <Suspense
+        fallback={
+          <div className="centered">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to="/quotes" />
+          </Route>
+          <Route path="/quotes" exact>
+            <AllQuotes />
+          </Route>
+          <Route path="/quotes/:quoteId">
+            <QuoteDetail />
+          </Route>
+          <Route path="/addQuote">
+            <AddQuote />
+          </Route>
+          {/* implementation for if route is not found */}
+          <Route path="*">
+            <NotFound />
+          </Route>
+        </Switch>
+      </Suspense>
     </Layout>
   );
 }
